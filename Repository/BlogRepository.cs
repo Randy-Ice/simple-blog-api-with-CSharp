@@ -23,7 +23,10 @@ namespace simple_blog_api_with_C_.Repository
 
         public async Task<Blog?> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var data = await _context.Blogs
+                .Include(b => b.Category) // Include the related Category entity
+                .FirstOrDefaultAsync(b => b.Id == id); // Fetch the blog by ID with its category
+            return data;
         }
 
 

@@ -1,6 +1,6 @@
 ﻿namespace simple_blog_api_with_C_.Repository
 {
-    public interface GenericRepository<T> where T : class
+    public interface IGenericRepository<T> where T : class
     {
         Task<IEnumerable<T>> GetAllAsync();
         Task<T?> GetByIdAsync(int id);
