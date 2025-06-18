@@ -1,6 +1,9 @@
 
+using Mapster;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
+using simple_blog_api_with_C_.Models;
+using simple_blog_api_with_C_.Models.DTOs;
 
 namespace simple_blog_api_with_C_
 {
@@ -22,6 +25,10 @@ namespace simple_blog_api_with_C_
 
             //add repository
             builder.Services.AddScoped<Repository.IGenericRepository<Models.Blog>, Repository.BlogRepository>();
+
+            //DTOs
+            TypeAdapterConfig<Blog, AllBlogsDTO>.NewConfig();
+            TypeAdapterConfig<AllBlogsDTO, Blog>.NewConfig();
 
             var app = builder.Build();
 
