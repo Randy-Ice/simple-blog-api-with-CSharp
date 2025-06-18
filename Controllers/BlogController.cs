@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Mapster;
+using Microsoft.AspNetCore.Mvc;
 using simple_blog_api_with_C_.Models;
+using simple_blog_api_with_C_.Models.DTOs;
 using simple_blog_api_with_C_.Repository;
 
 namespace simple_blog_api_with_C_.Controllers
@@ -17,8 +19,9 @@ namespace simple_blog_api_with_C_.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllBlogs()
         {
-            var blogs = await _context.GetAllAsync();
-            return Ok(blogs);
+            var data = await _context.GetAllAsync();
+            var blog_dto = data.Adapt<IEnumerable<AllBlogsDTO>>();
+            return Ok(blog_dto);
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetBlogById(int id)
