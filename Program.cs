@@ -20,6 +20,9 @@ namespace simple_blog_api_with_C_
             builder.Services.AddDbContext<Data.DatabaseContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+            //add repository
+            builder.Services.AddScoped<Repository.IGenericRepository<Models.Blog>, Repository.BlogRepository>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
